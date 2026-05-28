@@ -90,18 +90,6 @@
       line-height: 1.5;
     }
 
-    .pill {
-      display: inline-block;
-      background: var(--accent);
-      color: var(--accent-ink);
-      font-weight: 700;
-      font-size: 0.78rem;
-      letter-spacing: 0.14em;
-      padding: 7px 14px;
-      border-radius: 999px;
-      text-transform: uppercase;
-    }
-
     .cta {
       display: inline-flex;
       align-items: center;
@@ -135,22 +123,105 @@
       margin: 0;
     }
 
-    /* Screenshots */
-    .screens {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 32px;
-      margin: 0 auto 80px;
-      max-width: 640px;
-      align-items: start;
+    /* Carousel */
+    .carousel {
+      position: relative;
+      margin: 0 auto 20px;
     }
 
-    .screens img {
-      width: 100%;
-      height: auto;
-      border-radius: 22px;
+    .carousel-track {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      padding: 8px 0 20px;
+    }
+
+    .carousel-track::-webkit-scrollbar { display: none; }
+
+    .carousel-track::before,
+    .carousel-track::after {
+      content: '';
+      flex: 0 0 max(16px, calc(50% - 140px));
+    }
+
+    .carousel-track img {
+      flex: 0 0 auto;
+      height: 540px;
+      width: auto;
+      max-width: 90vw;
+      border-radius: 24px;
       background: var(--bg-soft);
       display: block;
+      scroll-snap-align: center;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
+      -webkit-user-drag: none;
+      user-select: none;
+    }
+
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.14);
+      border: 1px solid var(--rule);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text);
+      z-index: 2;
+      transition: transform 0.15s ease, opacity 0.2s ease;
+      opacity: 0.92;
+    }
+
+    .carousel-arrow:hover {
+      transform: translateY(-50%) scale(1.06);
+      opacity: 1;
+    }
+
+    .carousel-arrow:disabled {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .carousel-arrow.prev { left: 16px; }
+    .carousel-arrow.next { right: 16px; }
+    .carousel-arrow svg { width: 18px; height: 18px; }
+
+    @media (hover: none) and (pointer: coarse) {
+      .carousel-arrow { display: none; }
+    }
+
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: 0 auto 80px;
+    }
+
+    .carousel-dots button {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--rule);
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .carousel-dots button:hover { background: var(--muted); }
+    .carousel-dots button.active {
+      background: var(--text);
+      transform: scale(1.35);
     }
 
     /* Features */
@@ -264,12 +335,14 @@
       .tagline { font-size: 1.05rem; }
       .hero { gap: 18px; margin-bottom: 56px; }
       .logo { width: 104px; height: 104px; border-radius: 24px; }
-      .screens {
-        grid-template-columns: 1fr;
-        max-width: 320px;
-        margin: 0 auto 56px;
-        gap: 20px;
+
+      .carousel-track img { height: 460px; }
+      .carousel-track::before,
+      .carousel-track::after {
+        flex: 0 0 max(16px, calc(50% - 115px));
       }
+      .carousel-dots { margin-bottom: 56px; }
+
       .features {
         grid-template-columns: 1fr;
         gap: 16px;
@@ -279,6 +352,14 @@
       h2 { font-size: 1.4rem; }
       .steps li { grid-template-columns: 32px 1fr; gap: 14px; }
       .steps li::before { width: 32px; height: 32px; font-size: 0.9rem; }
+    }
+
+    @media (max-width: 420px) {
+      .carousel-track img { height: 420px; }
+      .carousel-track::before,
+      .carousel-track::after {
+        flex: 0 0 max(16px, calc(50% - 105px));
+      }
     }
   </style>
 </head>
@@ -301,10 +382,33 @@
       <p class="micro">Helt gratis ingen registrering</p>
     </header>
 
-    <section class="screens" aria-label="Skärmbilder">
-      <img src="assets/screenshot2.png" alt="Gratis kategorier i Imposter Svenska" />
-      <img src="assets/screenshot3.png" alt="Orden sparas i Imposter Svenska" />
+    <section class="carousel" aria-label="Skärmbilder">
+      <button class="carousel-arrow prev" type="button" aria-label="Föregående bild">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+      <div class="carousel-track" id="carousel">
+        <img src="assets/screenshot1.png" alt="Startskärm i Imposter Svenska" />
+        <img src="assets/screenshot2.png" alt="Gratis kategorier" loading="lazy" />
+        <img src="assets/screenshot3.png" alt="Orden sparas" loading="lazy" />
+        <img src="assets/screenshot4.png" alt="Röstning" loading="lazy" />
+        <img src="assets/screenshot5.png" alt="Vinnaren utses" loading="lazy" />
+      </div>
+      <button class="carousel-arrow next" type="button" aria-label="Nästa bild">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
     </section>
+
+    <div class="carousel-dots" id="dots" role="tablist" aria-label="Bildnavigering">
+      <button type="button" aria-label="Bild 1"></button>
+      <button type="button" aria-label="Bild 2"></button>
+      <button type="button" aria-label="Bild 3"></button>
+      <button type="button" aria-label="Bild 4"></button>
+      <button type="button" aria-label="Bild 5"></button>
+    </div>
 
     <section class="features">
       <div class="feature">
@@ -356,5 +460,53 @@
       <a href="https://kingarthur321.github.io/Imposter-Legal/">Integritetspolicy</a>
     </footer>
   </main>
+
+  <script>
+    (function () {
+      const track = document.getElementById('carousel');
+      const dots = Array.from(document.querySelectorAll('#dots button'));
+      const slides = Array.from(track.querySelectorAll('img'));
+      const prev = document.querySelector('.carousel-arrow.prev');
+      const next = document.querySelector('.carousel-arrow.next');
+
+      function currentIndex() {
+        const center = track.scrollLeft + track.clientWidth / 2;
+        let best = 0;
+        let bestDist = Infinity;
+        slides.forEach((img, i) => {
+          const mid = img.offsetLeft + img.clientWidth / 2;
+          const d = Math.abs(mid - center);
+          if (d < bestDist) { bestDist = d; best = i; }
+        });
+        return best;
+      }
+
+      function setActive(i) {
+        dots.forEach((d, j) => d.classList.toggle('active', j === i));
+        prev.disabled = i === 0;
+        next.disabled = i === slides.length - 1;
+      }
+
+      function scrollToIndex(i) {
+        const idx = Math.max(0, Math.min(slides.length - 1, i));
+        const img = slides[idx];
+        const left = img.offsetLeft - (track.clientWidth - img.clientWidth) / 2;
+        track.scrollTo({ left, behavior: 'smooth' });
+      }
+
+      let raf;
+      track.addEventListener('scroll', () => {
+        cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(() => setActive(currentIndex()));
+      });
+
+      dots.forEach((d, i) => d.addEventListener('click', () => scrollToIndex(i)));
+      prev.addEventListener('click', () => scrollToIndex(currentIndex() - 1));
+      next.addEventListener('click', () => scrollToIndex(currentIndex() + 1));
+
+      window.addEventListener('load', () => setActive(currentIndex()));
+      setActive(0);
+    })();
+  </script>
 </body>
 </html>
