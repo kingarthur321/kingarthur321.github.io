@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Imposter Svenska — partyspelet där en ljuger</title>
+  <meta name="description" content="Imposter Svenska är ett socialt partyspel där alla får ett ord utom en — impostern — som måste bluffa sig igenom. Gratis, för 2+ spelare på egna mobiler." />
+  <meta property="og:title" content="Imposter Svenska" />
+  <meta property="og:description" content="Partyspelet där alla får ett ord utom en. Hitta impostern." />
+  <meta property="og:type" content="website" />
+  <style>
+    :root {
+      --text: #1a1a1a;
+      --muted: #6b6b6b;
+      --rule: #ececec;
+      --link: #1f6feb;
+      --bg: #ffffff;
+      --bg-soft: #f7f7f8;
+      --btn-bg: #111111;
+      --btn-fg: #ffffff;
+      --max: 920px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                   "Helvetica Neue", Arial, sans-serif;
+      font-size: 17px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+
+    main {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 72px 24px 80px;
+    }
+
+    /* Hero */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 28px;
+      margin-bottom: 80px;
+    }
+
+    .logo {
+      width: 128px;
+      height: 128px;
+      border-radius: 28px;
+      object-fit: cover;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+    }
+
+    h1 {
+      font-size: 2.75rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin: 0;
+      line-height: 1.05;
+    }
+
+    .tagline {
+      color: var(--muted);
+      font-size: 1.2rem;
+      max-width: 580px;
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--btn-bg);
+      color: var(--btn-fg);
+      padding: 15px 28px;
+      border-radius: 14px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.02rem;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      margin-top: 4px;
+    }
+
+    .cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      text-decoration: none;
+    }
+
+    .cta svg {
+      width: 22px;
+      height: 22px;
+      flex-shrink: 0;
+    }
+
+    /* Screenshots */
+    .screens {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin: 0 0 80px;
+      align-items: start;
+    }
+
+    .screens img {
+      width: 100%;
+      height: auto;
+      border-radius: 20px;
+      background: var(--bg-soft);
+      display: block;
+    }
+
+    /* Features */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      max-width: 760px;
+      margin: 0 auto 72px;
+    }
+
+    .feature h3 {
+      font-size: 1.02rem;
+      font-weight: 600;
+      margin: 0 0 6px;
+      letter-spacing: -0.005em;
+    }
+
+    .feature p {
+      color: var(--muted);
+      font-size: 0.97rem;
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    /* About */
+    .about {
+      max-width: 600px;
+      margin: 0 auto 64px;
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      margin: 0 0 16px;
+    }
+
+    .about p {
+      margin: 0 0 14px;
+      color: var(--text);
+    }
+
+    a {
+      color: var(--link);
+      text-decoration: none;
+    }
+
+    a:hover { text-decoration: underline; }
+
+    hr {
+      border: none;
+      border-top: 1px solid var(--rule);
+      margin: 56px 0 24px;
+    }
+
+    footer {
+      color: var(--muted);
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    footer a { color: var(--muted); }
+    footer .sep { margin: 0 8px; opacity: 0.6; }
+
+    @media (max-width: 720px) {
+      main { padding: 48px 20px 56px; }
+      h1 { font-size: 2.1rem; }
+      .tagline { font-size: 1.05rem; }
+      .hero { gap: 22px; margin-bottom: 56px; }
+      .logo { width: 104px; height: 104px; border-radius: 24px; }
+      .screens {
+        grid-template-columns: 1fr;
+        max-width: 320px;
+        margin: 0 auto 56px;
+        gap: 20px;
+      }
+      .features {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        margin-bottom: 56px;
+      }
+      .feature { text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header class="hero">
+      <img class="logo" src="assets/imposterLogo.png" alt="Imposter Svenska" />
+      <h1>Imposter Svenska</h1>
+      <p class="tagline">
+        Alla får samma ord — utom en. Hitta impostern innan hen lurar er.
+      </p>
+      <a class="cta" href="https://apps.apple.com/se/app/imposter-svenska/id6772417037">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M17.05 12.04c-.02-2.05 1.68-3.03 1.76-3.08-.96-1.4-2.45-1.59-2.98-1.61-1.27-.13-2.48.75-3.12.75-.65 0-1.65-.73-2.71-.71-1.39.02-2.68.81-3.4 2.05-1.45 2.52-.37 6.24 1.04 8.28.69 1 1.51 2.12 2.58 2.08 1.04-.04 1.43-.67 2.69-.67 1.25 0 1.6.67 2.69.65 1.11-.02 1.81-1.01 2.49-2.02.79-1.16 1.11-2.29 1.13-2.35-.03-.01-2.16-.83-2.17-3.37zM15.07 6.13c.56-.68.94-1.63.84-2.57-.81.03-1.8.54-2.38 1.22-.52.6-.98 1.57-.86 2.49.91.07 1.83-.46 2.4-1.14z"/>
+        </svg>
+        Ladda ner på App Store
+      </a>
+    </header>
+
+    <section class="screens" aria-label="Skärmbilder">
+      <img src="assets/screenshot1.png" alt="Startskärm i Imposter Svenska" />
+      <img src="assets/screenshot2.png" alt="Gratis kategorier i Imposter Svenska" />
+      <img src="assets/screenshot4.png" alt="Röstning i Imposter Svenska" />
+    </section>
+
+    <section class="features">
+      <div class="feature">
+        <h3>2+ spelare</h3>
+        <p>Funkar i mindre sällskap eller hela festen. Alla spelar på sin egen mobil.</p>
+      </div>
+      <div class="feature">
+        <h3>Gratis kategorier</h3>
+        <p>Hundratals ord i färdiga teman — eller skriv egna ord för en privat runda.</p>
+      </div>
+      <div class="feature">
+        <h3>Ingen registrering</h3>
+        <p>Ladda ner, samla gänget, kör. Inget konto, ingen väntan.</p>
+      </div>
+    </section>
+
+    <section class="about">
+      <h2>Så funkar det</h2>
+      <p>
+        Alla får samma hemliga ord — utom en. Den personen är impostern och
+        vet ingenting. I tur och ordning beskriver alla ordet med ett enda
+        annat ord. Impostern måste bluffa sig fram utan att avslöja sig.
+      </p>
+      <p>
+        Efter rundan röstar ni: vem var impostern? Klurigt, snabbt och alltid
+        olika.
+      </p>
+    </section>
+
+    <hr />
+    <footer>
+      &copy; 2026 Arthur Höglund
+      <span class="sep">·</span>
+      <a href="https://kingarthur321.github.io/Imposter-Legal/">Privacy policy</a>
+    </footer>
+  </main>
+</body>
+</html>
